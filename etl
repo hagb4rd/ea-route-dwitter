@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# load dweet-pages from dwitter and store the json files in dweets directory
+extract() {
+limit=100
+mkdir -p "dweets"
+offset="${1-0}"
+while true; do 
+	wget "www.dwitter.net/api/dweets/?limit=$limit&offset=$offset" -O "dweets/$offset.json";
+	bytes=$(stat -c '%s' "dweets/$offset.json")
+	if [[ bytes -lt 112 ]]; then
+		exit;
+	fi
+	offset=$((offset+limit))
+	sleep 1
+done
+}
+
+# create total dweets.csv and dweets.json
+transform() {
+	rm dweets.json
+	rm dweets.csv
+	node index.js > dweets.json 
+}
+
+load() {
+	dbfile="${1:-dweets.sqlite}"
+	if [[ -f $dbfile ]]; then
+		echo "$dbfile exists already. please remove or try another filename and start again." >&2
+		exit 1;
+	fi
+	# echo ".import dweets.csv dweets" | \
+	rm authors.csv
+	echo "select distinct author from dweets order by author;" | sqlite3 dweets.sqlite -cmd ".mode csv" -cmd ".import dweets.csv dweets" > authors.csv
+	cat authors.csv
+	echo -- above: loading db and trying query -- 
+	echo 'echo "select distinct author from dweets order by author;" | sqlite3 dweets.sqlite -cmd ".mode csv"'
+	echo ----------------------------------------
+
+}
+
+#extract 
+transform
+load
