@@ -1,6 +1,6 @@
 {
   "name": "ea-route-dwitter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "app.use('/mountpoint', require('ea-route-dwitter')) in your express app - edit and live-preview dwitter golfing code.",
   "main": "package.js",
   "scripts": {
@@ -22,7 +22,7 @@
     "javascript",
     "dweets"
   ],
-  "author": "hagb4rd",
+  "author": "earend11",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/hagb4rd/ea-route-dwitter/issues"
@@ -30,6 +30,6 @@
   "homepage": "https://github.com/hagb4rd/ea-route-dwitter#readme",
   "dependencies": {
     "csv-writer": "^1.6.0",
-    "express": "^6.0.0"
+    "express": "^4.0.0"
   }
 }
