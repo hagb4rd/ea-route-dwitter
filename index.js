@@ -48,15 +48,3 @@ var main=async()=>{
 };
 
 main()
-
-/*
-const records = [
-    {name: 'Bob',  lang: 'French, English'},
-    {name: 'Mary', lang: 'English'}
-];
-
-csvWriter.writeRecords(records)       // returns a promise
-    .then(() => {
-        console.log('...Done');
-    });
-/* */
